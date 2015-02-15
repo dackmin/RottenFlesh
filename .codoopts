@@ -1,0 +1,5 @@
+--name "Rotten Flesh"
+--readme README.md
+--title "Rottent Flesh documentation"
+--undocumented true
+--verbose true
