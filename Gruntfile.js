@@ -54,6 +54,10 @@ module.exports = function(grunt) {
 		"uglify"
 	]);
 
+	grunt.registerTask("listen", [
+		"watch"
+	]);
+
 	grunt.registerTask("test", [
 
 	]);
