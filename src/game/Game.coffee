@@ -74,7 +74,7 @@ class Rotten.Game
 		#	that.currentGameState.draw();
 		#}
 
-		if @lastLoop is null then
+		if @lastLoop is null
 			@lastLoop = new Date().getTime()
 			requestAnimationFrame @requestAnimation
 			return

@@ -15,7 +15,7 @@ loop
 	break if x >= vendors.length or window.requestAnimationFrame is not undefined
 
 
-if window.requestAnimationFrame is undefined then
+if window.requestAnimationFrame is undefined
 	window.requestAnimationFrame = (callback, element) ->
 		currTime = new Date().getTime()
 		timeToCall = Math.max 0, 16 - (currTime - lastTime)
@@ -23,6 +23,6 @@ if window.requestAnimationFrame is undefined then
 		lastTime = currTime + timeToCall
 		return id
 
-if window.cancelAnimationFrame is undefined then
+if window.cancelAnimationFrame is undefined
 	window.cancelAnimationFrame = (id) ->
 		clearTimeout id
