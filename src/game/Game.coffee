@@ -37,6 +37,9 @@ class Rotten.Game
 		# Custom canvas
 		@render = new Rotten.Render options.render||Rotten.Render.CANVAS options.canvas
 
+		# Game assets manager
+		@assetManager = new Rotten.AssetLoader()
+
 
 	# Add a scene to your game (a config screen, a start screen, ...)
 	# and set it as default if default scene is null
