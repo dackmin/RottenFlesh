@@ -31,6 +31,9 @@ class Rotten.Game
 		# Current game fps
 		@fps = 0
 
+		# Last game loop
+		@lastLoop = null
+
 		# Custom canvas
 		@render = new Rotten.Render options.render||Rotten.Render.CANVAS options.canvas
 
@@ -42,6 +45,9 @@ class Rotten.Game
 	# @param {Rotten.Scene} scene Your scene
 	#
 	addScene: (name, scene) ->
+		if scene.update is undefined then console.warn "[Rotten.Game.addScene] You should add an .update() method in your scene to update objects"
+		if scene.draw is undefined then console.warn "[Rotten.Game.addScene] You should add a .draw() method in your scene to update objects"
+
 		@scenes[name] = scene
 		if @currentScene is null then @currentScene = @scenes[name]
 
@@ -49,4 +55,34 @@ class Rotten.Game
 	# Start your game with a scene name. If no scene name is provided,
 	start: (sceneName) ->
 		if sceneName is not null then @currentScene = @scenes[name]
-		if @currentScene is not null then return
+		if @currentScene is null then return
+
+
+	# Main game loop : Everything is done here
+	requestAnimation: () ->
+
+
+		#if(that.currentGameState.isStarted){
+		#	that.currentGameState.update();
+
+		#	//Clearing
+		#	FF.Render.clearRect(0,0,FF.Render.getWidth(),FF.Render.getHeight());
+
+		#	//Setting the background color
+		#	FF.Render.setBackgroundColor(that.backgroundColor);
+
+		#	that.currentGameState.draw();
+		#}
+
+		if @lastLoop is null then
+			@lastLoop = new Date().getTime()
+			requestAnimationFrame @requestAnimation
+			return
+
+		delta = (new Date().getTime() - @lastLoop) / 1000
+		@lastLoop = new Date().getTime()
+		@fps = (1 / delta).toFixed 1
+
+		console.log fps
+
+		requestAnimationFrame @requestAnimation
