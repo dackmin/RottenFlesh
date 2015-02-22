@@ -2,15 +2,14 @@
 # Just like your average event manager, but way better
 class Rotten.EventManager
 
-	# Current object event listeners
-	@listeners = {}
-
+	constructor: ->
+		@listeners = {}
 
 	# Add an event listener
 	# @param {String} name Event name
 	# @param {Function} listener Callback handler
 	listen: (name, listener) ->
-		@listeners[name] = [] if @listeners[name] is null
+		@listeners[name] = [] if not @listeners[name]
 		if listener not in @listeners[name] then @listeners[name].push listener
 
 
@@ -18,7 +17,7 @@ class Rotten.EventManager
 	# @param {String} name Event name
 	# @param {Object} event The event object to pass to listener
 	fire: (name, event) ->
-		@listeners[name][listener] event for listener in @listeners[name]
+		listener event for listener in @listeners[name]
 
 
 	# Mute an event listener
