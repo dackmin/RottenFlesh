@@ -6,10 +6,24 @@ module.exports = function(grunt) {
 		coffee: {
 			build: {
 				options: {
-					join: true
+					join: true,
+					bare: true
 				},
 				files: {
-					'build/rotten-flesh.js': 'src/**/*.coffee'
+					'build/rotten-flesh.js': [
+
+						// Main app file
+						'src/Main.coffee',
+
+						// Utils
+						'src/utils/Utils.coffee',
+						'src/utils/Vendors.coffee',
+						'src/utils/EventManager.coffee',
+
+						// Loaders
+						'src/loaders/ImageLoader.coffee',
+						'src/loaders/AssetLoader.coffee',
+					]
 				}
 			}
 		},
@@ -36,7 +50,8 @@ module.exports = function(grunt) {
 			},
 
 			gruntfile: {
-				files: ['Gruntfile.js']
+				files: ['Gruntfile.js'],
+				tasks: "coffee:build"
 			}
 		}
 	});
@@ -55,6 +70,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask("listen", [
+		"coffee:build",
 		"watch"
 	]);
 
