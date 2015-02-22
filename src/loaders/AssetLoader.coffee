@@ -36,6 +36,7 @@ class Rotten.AssetLoader extends Rotten.EventManager
 			loader = @assetsTypes[filetype] or throw new Error "[Rotten.AssetLoader] Filetype '#{filetype}' is not supported"
 			loader = new loader asset
 			loader.listen "loaded", (=> @assetLoaded asset)
+			loader.load()
 
 
 	# Called when an asset has just been loaded
