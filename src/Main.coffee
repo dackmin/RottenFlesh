@@ -1,0 +1,3 @@
+Rotten =
+    TextureCache: {}
+    Loaders: {}
