@@ -10,6 +10,7 @@ class Rotten.AssetLoader extends Rotten.EventManager
 	# Constructs an asset loader
 	# @param {Array} assets The assets you want to load
 	constructor: (assets) ->
+		super
 
 		# Assets to load
 		@assets = assets
@@ -34,7 +35,7 @@ class Rotten.AssetLoader extends Rotten.EventManager
 			filetype = (asset.split ".").pop().toLowerCase()
 			loader = @assetsTypes[filetype] or throw new Error "[Rotten.AssetLoader] Filetype '#{filetype}' is not supported"
 			loader = new loader asset
-			loader.listen "loaded", (-> @.assetLoaded asset)
+			loader.listen "loaded", (=> @assetLoaded asset)
 
 
 	# Called when an asset has just been loaded
