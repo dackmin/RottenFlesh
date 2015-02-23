@@ -46,19 +46,48 @@ module.exports = function(grunt) {
 		watch: {
 			coffeeScripts: {
 				files: "src/**/*.coffee",
-				tasks: "coffee:build"
+				tasks: "coffee:build",
+				options: { livereload: '<%= connect.options.livereload %>' }
 			},
 
 			gruntfile: {
 				files: ['Gruntfile.js'],
 				tasks: "coffee:build"
+			},
+
+			options: {
+				livereload: '<%= connect.options.livereload %>',
+				files: ["build/*.js"]
 			}
-		}
+		},
+
+
+		//Serve task
+		connect: {
+			options: {
+				port: 35565,
+				hostname: "localhost",
+				livereload: 35566
+			},
+
+			livereload: {
+				options: {
+					open: true,
+					middleware: function (connect) {
+						return [
+							connect.static('examples'),
+							connect().use('/build', connect.static('./build'))
+						];
+					}
+				}
+			}
+		},
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	grunt.registerTask("build", [
 		"coffee:build"
@@ -73,6 +102,14 @@ module.exports = function(grunt) {
 		"coffee:build",
 		"watch"
 	]);
+
+	grunt.registerTask("serve", "", function(){
+		grunt.task.run([
+			"coffee:build",
+			"connect:livereload",
+			"watch"
+		]);
+	});
 
 	grunt.registerTask("test", [
 
