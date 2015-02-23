@@ -22,6 +22,7 @@ module.exports = function(grunt) {
 
 						// Loaders
 						'src/loaders/ImageLoader.coffee',
+						'src/loaders/TiledMapLoader.coffee',
 						'src/loaders/AssetLoader.coffee',
 					]
 				}
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
 
 			options: {
 				livereload: '<%= connect.options.livereload %>',
-				files: ["build/*.js"]
+				files: ["build/*.js","examples/*/*.html"]
 			}
 		},
 
