@@ -44,3 +44,5 @@ class Rotten.AssetLoader extends Rotten.EventManager
 	assetLoaded: (filename) ->
 		@loaded++
 		@.fire "progress", { loaded: @loaded, total: @assets.length, current: filename }
+		if @loaded is @assets.length
+			@.fire "loaded", {}
