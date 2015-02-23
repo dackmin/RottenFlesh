@@ -1,3 +1,4 @@
 Rotten =
     TextureCache: {}
+    MapCache: {}
     Loaders: {}
