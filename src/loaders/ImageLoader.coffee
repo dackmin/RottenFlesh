@@ -4,11 +4,14 @@ class Rotten.Loaders.ImageLoader extends Rotten.EventManager
 
     # Loader constructor
     # @param {String} url Image url
-    constructor: (url) ->
+    constructor: (asset) ->
         super
 
+        # Name of your image
+        @name = asset.name
+
         # URL of your image
-        @imageUrl = url
+        @imageUrl = asset.url
 
 
     # Actually load your image
@@ -17,4 +20,4 @@ class Rotten.Loaders.ImageLoader extends Rotten.EventManager
         img = new Image()
         img.src = @imageUrl
         img.onload = () => @fire "loaded", {}
-        Rotten.TextureCache[@imageUrl] = img
+        Rotten.TextureCache[@name] = img
