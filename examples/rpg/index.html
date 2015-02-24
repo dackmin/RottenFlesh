@@ -9,7 +9,9 @@
 
             // Register assets
             assets = [
-                "assets/henry.png"
+                { name: "henry", url: "assets/henry.png" }, // Charset
+                { name: "my_wonderful_world", url: "assets/map.json" }, // Map
+                { name: "my_wonderful_tileset", url: "assets/green_hill.png"}, // Tileset
             ];
 
             // Add your game logic to onload event
@@ -26,7 +28,27 @@
                 // Listen on loaded event
                 loader.listen("loaded", function(){
                     console.log("Game is loaded ");
-                    
+
+                    // Create main game
+                    var game = new Rotten.Game();
+
+                    // Create main scene
+                    var main_scene = new Rotten.Scene()
+
+                    // Create main map
+                    var map = new Rotten.TiledMap("my_wonderful_world", 32, 32);
+
+                    // Add tilesets to map
+                    map.addTileset("green_hill", "my_wonderful_tileset");
+
+                    // Add map to scene
+                    main_scene.addExisting(map);
+
+                    // Add scene to game
+                    game.addScene(main_scene);
+
+                    // Start game !
+                    game.start();
                 })
 
                 // Load everything
