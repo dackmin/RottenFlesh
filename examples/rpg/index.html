@@ -7,8 +7,6 @@
         <script src="/build/rotten-flesh.js"></script>
         <script>
 
-            var loader;
-
             // Register assets
             assets = [
                 "assets/henry.png"
@@ -18,7 +16,7 @@
             window.onload = function(){
 
                 // Create your asset loader
-                loader = new Rotten.AssetLoader(assets);
+                var loader = new Rotten.AssetLoader(assets);
 
                 // Listen on progress event
                 loader.listen("progress", function(e){
@@ -27,7 +25,8 @@
 
                 // Listen on loaded event
                 loader.listen("loaded", function(){
-                    console.log("everything is loaded");
+                    console.log("Game is loaded ");
+                    
                 })
 
                 // Load everything
