@@ -32,11 +32,12 @@ class Rotten.AssetLoader extends Rotten.EventManager
 	# Starts to load all the assets
 	load: () ->
 		for asset in @assets
-			filetype = (asset.url.split ".").pop().toLowerCase()
-			loader = @assetsTypes[filetype] or throw new Error "[Rotten.AssetLoader] Filetype '#{filetype}' is not supported"
-			loader = new loader asset
-			loader.listen "loaded", do(asset) => @assetLoaded asset
-			loader.load()
+			do (asset) =>
+				filetype = (asset.url.split ".").pop().toLowerCase()
+				loader = @assetsTypes[filetype] or throw new Error "[Rotten.AssetLoader] Filetype '#{filetype}' is not supported"
+				loader = new loader asset
+				loader.listen "loaded", => @assetLoaded asset
+				loader.load()
 
 
 	# Called when an asset has just been loaded
