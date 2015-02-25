@@ -35,14 +35,14 @@ class Rotten.AssetLoader extends Rotten.EventManager
 			filetype = (asset.url.split ".").pop().toLowerCase()
 			loader = @assetsTypes[filetype] or throw new Error "[Rotten.AssetLoader] Filetype '#{filetype}' is not supported"
 			loader = new loader asset
-			loader.listen "loaded", (=> @assetLoaded asset.name)
+			loader.listen "loaded", do(asset) => @assetLoaded asset
 			loader.load()
 
 
 	# Called when an asset has just been loaded
 	# @param {String} filename Name of the current loaded file
-	assetLoaded: (filename) ->
+	assetLoaded: (asset) ->
 		@loaded++
-		@.fire "progress", { loaded: @loaded, total: @assets.length, current: filename }
+		@.fire "progress", { loaded: @loaded, total: @assets.length, current: asset.name }
 		if @loaded is @assets.length
 			@.fire "loaded", {}

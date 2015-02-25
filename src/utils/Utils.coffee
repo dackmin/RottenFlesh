@@ -1,9 +1,9 @@
 class Rotten.Utils
 
-    getXMLHttpRequest = () ->
+    @getXMLHttpRequest: () ->
 	    if window.XMLHttpRequest then new XMLHttpRequest() else new ActiveXObject "Microsoft.XMLHTTP"
 
-    ajax: (options) ->
+    @ajax: (options) ->
         type = options.type or "GET"
         async = options.async or true
         url = options.url or ""
