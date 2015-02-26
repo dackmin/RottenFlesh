@@ -20,6 +20,11 @@ module.exports = function(grunt) {
 						'src/utils/Vendors.coffee',
 						'src/utils/EventManager.coffee',
 
+						// Renders
+						'src/render/Engine.coffee',
+						'src/render/CanvasRender.coffee',
+						'src/render/WebGL2DRender.coffee',
+
 						// Loaders
 						'src/loaders/ImageLoader.coffee',
 						'src/loaders/TiledMapLoader.coffee',
