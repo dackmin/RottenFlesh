@@ -26,7 +26,7 @@ class Rotten.Game
 		@lastScene = null
 
 		# The game background color
-		@backgroundColor = options and options.background or "#000"
+		@backgroundColor = if options and options.background then options.background else "#000"
 
 		# Current game fps
 		@fps = 0
@@ -35,7 +35,8 @@ class Rotten.Game
 		@lastLoop = null
 
 		# Custom canvas
-		@render = new Rotten.Render options.render||Rotten.Render.CANVAS options.canvas
+		@render = if options and options.render is Rotten.Engine.WEBGL2D then Rotten.Renders.WebGL2D else Rotten.Renders.Canvas
+		@render = new @render if options and options.canvas then options.canvas else null
 
 		# Game assets manager
 		@assetManager = new Rotten.AssetLoader()
@@ -49,7 +50,7 @@ class Rotten.Game
 	#
 	addScene: (name, scene) ->
 		if scene.update is undefined then console.warn "[Rotten.Game.addScene] You should add an .update() method in your scene to update objects"
-		if scene.draw is undefined then console.warn "[Rotten.Game.addScene] You should add a .draw() method in your scene to update objects"
+		if scene.draw is undefined then console.warn "[Rotten.Game.addScene] You should add a .draw() method in your scene to draw objects"
 
 		@scenes[name] = scene
 		if @currentScene is null then @currentScene = @scenes[name]
@@ -59,6 +60,8 @@ class Rotten.Game
 	start: (sceneName) ->
 		if sceneName is not null then @currentScene = @scenes[name]
 		if @currentScene is null then return
+
+		requestAnimation()
 
 
 	# Main game loop : Everything is done here
