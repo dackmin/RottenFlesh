@@ -35,7 +35,7 @@ class Rotten.Game
 		@lastLoop = null
 
 		# Custom canvas
-		@render = if options and options.render is Rotten.Engine.WEBGL2D then Rotten.Renders.WebGL2D else Rotten.Renders.Canvas
+		@render = if options and options.render is Rotten.Engine.WEBGL2D then Rotten.Renders.WebGL2DRender else Rotten.Renders.CanvasRender
 		@render = new @render if options and options.canvas then options.canvas else null
 
 		# Game assets manager
