@@ -2,4 +2,5 @@ Rotten =
     TextureCache: {}
     MapCache: {}
     Loaders: {}
-    Drawable: {}
+    Drawables: {}
+    Renders: {}
