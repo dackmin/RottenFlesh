@@ -9,8 +9,8 @@ class Rotten.Engine
             @view.style.position = "absolute"
             @view.style.top = "0px"
             @view.style.left = "0px"
-            @view.width = FF.Util.screenWidth()
-            @view.height = FF.Util.screenHeight()
+            @view.width = Rotten.Utils.screenWidth()
+            @view.height = Rotten.Utils.screenHeight()
             document.body.appendChild @view
         else
             @view = view
