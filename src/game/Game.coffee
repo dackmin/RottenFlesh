@@ -26,7 +26,7 @@ class Rotten.Game
 		@lastScene = null
 
 		# The game background color
-		@backgroundColor = options.background || "#000"
+		@backgroundColor = options and options.background or "#000"
 
 		# Current game fps
 		@fps = 0
