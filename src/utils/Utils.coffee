@@ -17,3 +17,23 @@ class Rotten.Utils
 
         xhr.open type, url, async
         xhr.send()
+
+    @screenSize: ->
+        if not window.innerWidth
+            if document.documentElement.clientWidth is not 0
+                width: document.documentElement.clientWidth
+                height: document.documentElement.clientHeight
+
+            else
+                width: document.body.clientWidth
+                height: document.body.clientHeight
+
+        else
+            width: window.innerWidth;
+            height: window.innerHeight;
+
+    @screenWidth: ->
+        Rotten.Utils.screenSize().width
+
+    @screenHeight: ->
+        Rotten.Utils.screenSize().height
