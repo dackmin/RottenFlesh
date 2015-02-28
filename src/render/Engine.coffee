@@ -20,7 +20,7 @@ class Rotten.Engine
 
 
     getContext: ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override getContext() method"
 
     getWidth: ->
         @width
@@ -29,28 +29,28 @@ class Rotten.Engine
         @height
 
     setBackgroundColor: (color) ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override setBackgroundColor() method"
 
     clearRect: ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override clearRect() method"
 
     save: ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override save() method"
 
     restore: ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override restore() method"
 
     translate: (x,y) ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override translate() method"
 
     rotate: (angle) ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override rotate() method"
 
     setAlpha: (alpha) ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override setAlpha() method"
 
     drawImage: (image, x, y, width, height)->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override drawImage() method"
 
     drawSubImage: (image, sub_x, sub_y, sub_width, sub_height, x, y, width, height) ->
-        throw new Error "[Rotten.Engine] abstract method should be implemented"
+        throw new Error "[Rotten.Engine] Your render should override drawSubImage() method"
