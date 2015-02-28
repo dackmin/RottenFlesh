@@ -80,4 +80,5 @@ class Rotten.Game
 		if sceneName is not undefined then @currentScene = @scenes[name]
 		if @currentScene is undefined or null then return
 
+		@currentScene.setup()
 		@requestAnimation()
