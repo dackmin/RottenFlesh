@@ -34,4 +34,9 @@ class Rotten.Scene
 
 
     addExisting: (object, unique) ->
-        @objects.push object if unique and @objects.indexOf object == -1
+        object.game = @game
+        
+        if unique
+            @objects.push object if @objects.indexOf object == -1
+        else
+            @objects.push object
