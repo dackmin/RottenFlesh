@@ -77,7 +77,7 @@ class Rotten.Game
 	#
 	# @param {String} sceneName Your scene name
 	start: (sceneName) ->
-		if sceneName is not null then @currentScene = @scenes[name] else @currentScene = @scenes[0]
+		if sceneName is not undefined then @currentScene = @scenes[name]
 		if @currentScene is undefined or null then return
 
 		@requestAnimation()
