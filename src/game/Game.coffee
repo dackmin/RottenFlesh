@@ -13,7 +13,6 @@ class Rotten.Game
 	# @option options {String} render Render (default: Rotten.Render.CANVAS)
 	# @option options {String} background Background color (default: #000)
 	# @option options {Object} canvas You can use a custom canvas to draw in
-	#
 	constructor: (options) ->
 
 		# Represents all the scenes (or game states) of the game
@@ -41,6 +40,23 @@ class Rotten.Game
 		# Game assets manager
 		@assetManager = new Rotten.AssetLoader()
 
+		# Main game loop : Due to coffee script scope problems, I had to put
+		# that here
+		@requestAnimation = () =>
+			@currentScene.update()
+			@currentScene.draw()
+
+			if @lastLoop is null
+				@lastLoop = new Date().getTime()
+				requestAnimationFrame @requestAnimation
+				return
+
+			delta = (new Date().getTime() - @lastLoop) / 1000
+			@lastLoop = new Date().getTime()
+			@fps = (1 / delta).toFixed 1
+
+			requestAnimationFrame @requestAnimation
+
 
 	# Add a scene to your game (a config screen, a start screen, ...)
 	# and set it as default if default scene is null
@@ -56,39 +72,12 @@ class Rotten.Game
 		if @currentScene is null then @currentScene = @scenes[name]
 
 
-	# Start your game with a scene name. If no scene name is provided,
+	# Start your game with a scene name. If no scene name is provided, then
+	# the first scene in game is used
+	#
+	# @param {String} sceneName Your scene name
 	start: (sceneName) ->
-		if sceneName is not null then @currentScene = @scenes[name]
-		if @currentScene is null then return
+		if sceneName is not null then @currentScene = @scenes[name] else @currentScene = @scenes[0]
+		if @currentScene is undefined or null then return
 
-		requestAnimation()
-
-
-	# Main game loop : Everything is done here
-	requestAnimation: () ->
-
-
-		#if(that.currentGameState.isStarted){
-		#	that.currentGameState.update();
-
-		#	//Clearing
-		#	FF.Render.clearRect(0,0,FF.Render.getWidth(),FF.Render.getHeight());
-
-		#	//Setting the background color
-		#	FF.Render.setBackgroundColor(that.backgroundColor);
-
-		#	that.currentGameState.draw();
-		#}
-
-		if @lastLoop is null
-			@lastLoop = new Date().getTime()
-			requestAnimationFrame @requestAnimation
-			return
-
-		delta = (new Date().getTime() - @lastLoop) / 1000
-		@lastLoop = new Date().getTime()
-		@fps = (1 / delta).toFixed 1
-
-		console.log fps
-
-		requestAnimationFrame @requestAnimation
+		@requestAnimation()
