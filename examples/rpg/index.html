@@ -33,10 +33,10 @@
                     var game = new Rotten.Game();
 
                     // Create main scene
-                    var main_scene = new Rotten.Scene()
+                    var main_scene = new Rotten.Scene(game);
 
                     // Create main map
-                    var map = new Rotten.Drawables.TiledMap("my_wonderful_world", 32, 32);
+                    var map = new Rotten.Drawables.TiledMap("my_wonderful_world", 64, 64);
 
                     // Add tilesets to map
                     map.addTileset("green_hill", "my_wonderful_tileset");
@@ -48,7 +48,7 @@
                     game.addScene("main_scene", main_scene);
 
                     // Start game !
-                    game.start();
+                    game.start("main_scene");
                 })
 
                 // Load everything
