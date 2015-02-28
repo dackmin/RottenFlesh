@@ -8,20 +8,17 @@ lastTime = 0
 vendors = ['ms', 'moz', 'webkit', 'o']
 x = 0
 
-loop
-	window.requestAnimationFrame = window["#{vendors[x]}RequestAnimationFrame"]
-	window.cancelAnimationFrame = window["#{vendors[x]}CancelAnimationFrame"] or window["#{vendors[x]}CancelRequestAnimationFrame"]
-	++x
-	break if x >= vendors.length or window.requestAnimationFrame is not undefined
-
+for vendor in vendors
+	break if window.requestAnimationFrame is not undefined
+	window.requestAnimationFrame = window["#{vendor}RequestAnimationFrame"]
+	window.cancelAnimationFrame = window["#{vendor}CancelAnimationFrame"] or window["#{vendor}CancelRequestAnimationFrame"]
 
 if window.requestAnimationFrame is undefined
 	window.requestAnimationFrame = (callback, element) ->
 		currTime = new Date().getTime()
 		timeToCall = Math.max 0, 16 - (currTime - lastTime)
-		id = window.setTimeout (-> callback currTime + timeToCall) timeToCall
 		lastTime = currTime + timeToCall
-		return id
+		window.setTimeout (-> callback currTime + timeToCall), timeToCall
 
 if window.cancelAnimationFrame is undefined
 	window.cancelAnimationFrame = (id) ->
