@@ -119,3 +119,38 @@ class Rotten.Engine
     # @param {int} height Height of clipped image
     drawSubImage: (image, sub_x, sub_y, sub_width, sub_height, x, y, width, height) ->
         throw new Error "[Rotten.Engine] Your render should override drawSubImage() method"
+
+
+    # Used to begin a path in context
+    beginPath: ->
+        throw new Error "[Rotten.Engine] Your render should override beginPath() method"
+
+
+    # Used to clip a region defined by a path
+    clip: ->
+        throw new Error "[Rotten.Engine] Your render should override clip() method"
+
+
+    # Draw an arc (commonly used to draw circles)
+    #
+    # @param {int} centerX X position of the center of your arc
+    # @param {int} centerY Y position of the center of your arc
+    # @param {float} radius Your arc radius
+    # @param {int} startingAngle Radian angle on a circle where to draw your arc
+    # @param {int} endAngle Radian angle where to finish your angle
+    # @param {boolean} counterClockwise Optional. Specifies whether the drawing
+    #                   should be counterclockwise or clockwise. False is
+    #                   default, and indicates clockwise, while true indicates
+    #                   counter-clockwise.
+    arc: (centerX, centerY, radius, startingAngle, endAngle, counterClockwise) ->
+        throw new Error "[Rotten.Engine] Your render should override arc() method"
+
+
+    # Draw a rectangle
+    #
+    # @param {int} x X position of your rectangle
+    # @param {int} y Y position of your rectangle
+    # @param {int} width Width of your rectangle
+    # @param {int} height Height of your rectangle
+    rect: (x, y, width, height) ->
+        throw new Error "[Rotten.Engine] Your render should override rect() method"
