@@ -31,7 +31,7 @@ class Rotten.Engine
     setBackgroundColor: (color) ->
         throw new Error "[Rotten.Engine] Your render should override setBackgroundColor() method"
 
-    clearRect: ->
+    clearRect: (x, y, width, height) ->
         throw new Error "[Rotten.Engine] Your render should override clearRect() method"
 
     save: ->
