@@ -4,7 +4,6 @@ class Rotten.Drawables.Sprite extends Rotten.Drawable
 
     # Constructs a new sprite
     #
-    # @param {Rotten.Game} game Current game
     # @param {String} asset_name Name of your asset in texture cache
     # @param {Object} options Sprite options
     # @option options {int} x X position of your sprite
@@ -16,7 +15,7 @@ class Rotten.Drawables.Sprite extends Rotten.Drawable
     # @option options {Array} anchor X & Y positions of your sprite anchor
     # @option options {float} alpha Opacity of your sprite
     # @option options {boolean} hidden Whether to show your sprite or not
-    constructor: (@game, asset_name, options) ->
+    constructor: (asset_name, options) ->
         super
 
         # Image of your sprite
