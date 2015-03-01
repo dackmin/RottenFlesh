@@ -3,6 +3,7 @@ class Rotten.Loaders.ImageLoader extends Rotten.EventManager
 
 
     # Loader constructor
+    #
     # @param {String} url Image url
     constructor: (asset) ->
         super
@@ -14,8 +15,8 @@ class Rotten.Loaders.ImageLoader extends Rotten.EventManager
         @imageUrl = asset.url
 
 
-    # Actually load your image
-    load: () ->
+    # Actually loads your image
+    load: ->
 
         img = new Image()
         img.src = @imageUrl

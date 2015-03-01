@@ -5,12 +5,13 @@
 #   var scene = new Rotten.Scene();
 #
 # @example How to add stuff to your scene
-#   scene.addExisting({Rotten.Drawables});
+#   scene.addExisting({Rotten.Drawable});
 #
 class Rotten.Scene
 
 
     # Constructs your scene
+    #
     # @param {Rotten.Game} game Your current game
     constructor: (@game) ->
 
@@ -33,9 +34,13 @@ class Rotten.Scene
         object.draw() for object in @objects
 
 
+    # Add an existing object to your scene
+    #
+    # @param {Object} object The thing you want to add to your scene
+    # @param {boolean} unique Whether you want to avoid duplicated objects
     addExisting: (object, unique) ->
         object.game = @game
-        
+
         if unique
             @objects.push object if @objects.indexOf object == -1
         else

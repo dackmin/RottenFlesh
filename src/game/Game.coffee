@@ -63,7 +63,6 @@ class Rotten.Game
 	#
 	# @param {String} name The name of your scene (to retrieve it later)
 	# @param {Rotten.Scene} scene Your scene
-	#
 	addScene: (name, scene) ->
 		if scene.update is undefined then console.warn "[Rotten.Game.addScene] You should add an .update() method in your scene to update objects"
 		if scene.draw is undefined then console.warn "[Rotten.Game.addScene] You should add a .draw() method in your scene to draw objects"

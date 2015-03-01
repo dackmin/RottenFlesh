@@ -3,7 +3,6 @@
 #
 # requestAnimationFrame polyfill by Erik Möller
 # fixes from Paul Irish and Tino Zijdel
-#
 lastTime = 0
 vendors = ['ms', 'moz', 'webkit', 'o']
 x = 0

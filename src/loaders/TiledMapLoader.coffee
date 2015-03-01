@@ -5,6 +5,7 @@ class Rotten.Loaders.TiledMapLoader extends Rotten.EventManager
 
 
     # Constructs a tiled map loader
+    #
     # @param {String} url Map url
     constructor: (asset) ->
         super
@@ -17,7 +18,7 @@ class Rotten.Loaders.TiledMapLoader extends Rotten.EventManager
 
 
     # Loads the tiled map
-    load: () ->
+    load: ->
         Rotten.Utils.ajax
             url: @mapUrl
             complete: (data) =>

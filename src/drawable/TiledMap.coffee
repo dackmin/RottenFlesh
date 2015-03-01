@@ -30,9 +30,11 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
 
 
     # Setup your TiledMap
+    #
+    # @override
     setup: ->
 
-        # Setup tile positions on tileset to avoid intensive usage of CPU
+        # Register tile positions on tileset to avoid intensive usage of CPU
         for tileset in @map.tilesets
             tileset.positions = []
             z = 1
@@ -45,10 +47,15 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
 
 
     # Update your TiledMap
+    #
+    # @override
     update: ->
+        # Nothing to do here, we only draw shit on maps
 
 
     # Draw your TiledMap
+    #
+    # @override
     draw: ->
 
         # Save context
@@ -66,9 +73,14 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
         @game.render.restore()
 
 
-    # Draw a tile
+    # Draws a tile
+    #
+    # @param {int} x Position of tile on map (in tiles, not px)
+    # @param {int} y Position of tile on map (in tiles, not px)
+    # @param {int} GID Tileset clipping position ID
+    # @param {String} type Determine if your image is an object or a tile
     drawImageFromGID: (x, y, GID, type) ->
-        #if isNaN GID then return;
+        if isNaN GID then return
 
         tileset = @getTilesetFromGID GID
         tile_position = tileset.positions[GID];
@@ -89,6 +101,9 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
             tileset.tileheight
 
 
+    # Get a tileset from a given GID
+    #
+    # @param {int} GID Tileset clipping position ID
     getTilesetFromGID: (GID) ->
         tileset = {}
 
@@ -101,7 +116,8 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
 
 
     # Add a tileset image
+    #
     # @param {String} tilesetName Name of your tileset INSIDE your map
-    # @param {String} assetName Name of your preloaded asset INSIDE rotten
+    # @param {String} assetName Name of your preloaded asset INSIDE Rotten
     addTileset: (tilesetName, assetName) ->
         @tilesets_images[tilesetName] = assetName

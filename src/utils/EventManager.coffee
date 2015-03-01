@@ -2,27 +2,32 @@
 # Just like your average event manager, but way better
 class Rotten.EventManager
 
-	constructor: ->
-		@listeners = {}
 
-	# Add an event listener
-	# @param {String} name Event name
-	# @param {Function} listener Callback handler
-	listen: (name, listener) ->
-		@listeners[name] = [] if not @listeners[name]
-		if listener not in @listeners[name] then @listeners[name].push listener
+    # Constructs the event manager
+    constructor: ->
+        @listeners = {}
 
-
-	# Fire an event & execute a callback
-	# @param {String} name Event name
-	# @param {Object} event The event object to pass to listener
-	fire: (name, event) ->
-		listener event for listener in @listeners[name]
+    # Add an event listener
+    #
+    # @param {String} name Event name
+    # @param {Function} listener Callback handler
+    listen: (name, listener) ->
+        @listeners[name] = [] if not @listeners[name]
+        if listener not in @listeners[name] then @listeners[name].push listener
 
 
-	# Mute an event listener
-	# @param {String} name Event name
-	# @param {Function} listener Callback to delete
-	mute: (name, listener) ->
-		index = listener in @listeners[name]
-		@listeners[name].splice listener, 1 if index >= 0
+    # Fire an event & execute a callback
+    #
+    # @param {String} name Event name
+    # @param {Object} event The event object to pass to listener
+    fire: (name, event) ->
+        listener event for listener in @listeners[name]
+
+
+    # Mute an event listener
+    #
+    # @param {String} name Event name
+    # @param {Function} listener Callback to delete
+    mute: (name, listener) ->
+        index = listener in @listeners[name]
+        @listeners[name].splice listener, 1 if index >= 0

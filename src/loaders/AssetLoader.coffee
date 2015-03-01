@@ -8,6 +8,7 @@ class Rotten.AssetLoader extends Rotten.EventManager
 
 
 	# Constructs an asset loader
+	#
 	# @param {Array} assets The assets you want to load
 	constructor: (assets) ->
 		super
@@ -30,7 +31,7 @@ class Rotten.AssetLoader extends Rotten.EventManager
 
 
 	# Starts to load all the assets
-	load: () ->
+	load: ->
 		for asset in @assets
 			do (asset) =>
 				filetype = (asset.url.split ".").pop().toLowerCase()
@@ -41,7 +42,8 @@ class Rotten.AssetLoader extends Rotten.EventManager
 
 
 	# Called when an asset has just been loaded
-	# @param {String} filename Name of the current loaded file
+	#
+	# @param {Object} asset Object made from name & url of the loaded asset
 	assetLoaded: (asset) ->
 		@loaded++
 		@.fire "progress", { loaded: @loaded, total: @assets.length, current: asset.name }
