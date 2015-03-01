@@ -67,7 +67,7 @@ class Rotten.Renders.CanvasRender extends Rotten.Engine
     #
     # @param {float} alpha Alpha value (from .0 to 1.0)
     setAlpha: (alpha) ->
-        @.getContext().globalAlpha alpha
+        @.getContext().globalAlpha = alpha
 
 
     # Draw an image on context
