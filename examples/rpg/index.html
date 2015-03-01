@@ -37,12 +37,14 @@
 
                     // Create main map
                     var map = new Rotten.Drawables.TiledMap("my_wonderful_world", 64, 64);
-
-                    // Add tilesets to map
                     map.addTileset("green_hill", "my_wonderful_tileset");
 
-                    // Add map to scene
+                    // Create some sprite
+                    var henry = new Rotten.Drawables.Sprite("henry");
+
+                    // Add things to scene by order of appearance
                     main_scene.addExisting(map);
+                    main_scene.addExisting(henry);
 
                     // Add scene to game
                     game.addScene("main_scene", main_scene);
