@@ -17,6 +17,7 @@ class Rotten.Drawables.Sprite extends Rotten.Drawable
     # @option options {boolean} hidden Whether to show your sprite or not
     constructor: (asset_name, options) ->
         super
+        if options is undefined then options = {}
 
         # Image of your sprite
         @image = Rotten.TextureCache[asset_name] or throw new Error "[Rotten.Drawables.Sprite] You did not preloaded one of your assets (name: #{asset_name})"
