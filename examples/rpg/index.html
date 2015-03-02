@@ -46,6 +46,12 @@
                     main_scene.addExisting(map);
                     main_scene.addExisting(henry);
 
+                    // Register some key events
+                    game.inputs.onKeyDown(["z", "w"], function(human_name){ console.log(human_name); henry.y-= 10; });
+                    game.inputs.onKeyDown(["q", "a"], function(human_name){ henry.x-= 10; });
+                    game.inputs.onKeyDown(["s"], function(human_name){ henry.y+= 10; });
+                    game.inputs.onKeyDown(["d"], function(human_name){ henry.x+= 10; });
+
                     // Add scene to game
                     game.addScene("main_scene", main_scene);
 
