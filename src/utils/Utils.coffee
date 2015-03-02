@@ -65,3 +65,10 @@ class Rotten.Utils
     # @return {int} Screen height
     @screenHeight: ->
         Rotten.Utils.screenSize().height
+
+
+    # Get your browser app name (not bulletproof at all, fell free to do better)
+    #
+    # @return {String} Browser app name
+    @getBrowserName: ->
+        navigator.appName
