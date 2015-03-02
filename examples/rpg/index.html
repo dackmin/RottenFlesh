@@ -39,8 +39,8 @@
                     var map = new Rotten.Drawables.TiledMap("my_wonderful_world", 64, 64);
                     map.addTileset("green_hill", "my_wonderful_tileset");
 
-                    // Create some sprite
-                    var henry = new Rotten.Drawables.Sprite("henry");
+                    // Create a spritesheet
+                    var henry = new Rotten.Drawables.SpriteSheet("henry", 32, 32);
 
                     // Add things to scene by order of appearance
                     main_scene.addExisting(map);
