@@ -19,6 +19,7 @@ module.exports = function(grunt) {
 						'src/utils/Utils.coffee',
 						'src/utils/Vendors.coffee',
 						'src/utils/EventManager.coffee',
+						'src/utils/InputManager.coffee',
 
 						// Renders
 						'src/render/Engine.coffee',
