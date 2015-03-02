@@ -40,6 +40,9 @@ class Rotten.Game
 		# Game assets manager
 		@assetManager = new Rotten.AssetLoader()
 
+		# Start input manager
+		@inputs = new Rotten.InputManager @
+
 		# Main game loop : Due to coffee script scope problems, I had to put
 		# that here
 		@requestAnimation = () =>
@@ -79,5 +82,6 @@ class Rotten.Game
 		if sceneName is not undefined then @currentScene = @scenes[name]
 		if @currentScene is undefined or null then return
 
+		@inputs.setup()
 		@currentScene.setup()
 		@requestAnimation()
