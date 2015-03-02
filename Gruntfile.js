@@ -34,6 +34,7 @@ module.exports = function(grunt) {
 						'src/drawable/Drawable.coffee',
 						'src/drawable/TiledMap.coffee',
 						'src/drawable/Sprite.coffee',
+						'src/drawable/SpriteSheet.coffee',
 
 						// Game
 						'src/game/Game.coffee',
