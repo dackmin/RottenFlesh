@@ -15,16 +15,13 @@
             ];
 
             // Create scene
-            function Stage(game){
-
-                // Inherit methods
-                Rotten.Utils.extends(this, Rotten.Scene);
+            function Stage(){
 
                 // Init vars
                 var map, henry;
 
                 // One time call on game start
-                this.setup = function(){
+                this.setup = function(scene){
 
                     // Create main map
                     map = new Rotten.Drawables.TiledMap("my_wonderful_world", 64, 64);
@@ -34,8 +31,8 @@
                     henry = new Rotten.Drawables.SpriteSheet("henry", 32, 32);
 
                     // Add things to scene by order of appearance
-                    this.addExisting(map);
-                    this.addExisting(henry);
+                    scene.addExisting(map);
+                    scene.addExisting(henry);
 
                 };
 
@@ -44,7 +41,6 @@
                 };
 
                 this.draw = function(){
-
                 };
 
             };
@@ -68,7 +64,7 @@
                     var game = new Rotten.Game();
 
                     // Create main scene
-                    var scene = new Stage(game);
+                    var scene = new Rotten.Scene(game, new Stage());
 
                     // Add scene to game
                     game.addScene("main_scene", scene);
