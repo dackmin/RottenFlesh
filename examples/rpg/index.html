@@ -36,12 +36,14 @@
 
                 };
 
-                this.update = function(){
-
+                this.update = function(scene){
+                    if(scene.game.inputs.pressed(["z", "w"])) henry.y-= 10;
+                    if(scene.game.inputs.pressed(["q", "a"])) henry.x-= 10;
+                    if(scene.game.inputs.pressed(["s"])) henry.y+= 10;
+                    if(scene.game.inputs.pressed(["d"])) henry.x+= 10;
                 };
 
-                this.draw = function(){
-                };
+                this.draw = function(){};
 
             };
 
