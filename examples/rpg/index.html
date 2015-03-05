@@ -14,6 +14,41 @@
                 { name: "my_wonderful_tileset", url: "assets/green_hill.png"}, // Tileset
             ];
 
+            // Create scene
+            function Stage(game){
+
+                // Inherit methods
+                Rotten.Utils.extends(this, Rotten.Scene);
+
+                // Init vars
+                var map, henry;
+
+                // One time call on game start
+                this.setup = function(){
+
+                    // Create main map
+                    map = new Rotten.Drawables.TiledMap("my_wonderful_world", 64, 64);
+                    map.addTileset("green_hill", "my_wonderful_tileset");
+
+                    // Create a spritesheet
+                    henry = new Rotten.Drawables.SpriteSheet("henry", 32, 32);
+
+                    // Add things to scene by order of appearance
+                    this.addExisting(map);
+                    this.addExisting(henry);
+
+                };
+
+                this.update = function(){
+
+                };
+
+                this.draw = function(){
+
+                };
+
+            };
+
             // Add your game logic to onload event
             window.onload = function(){
 
@@ -33,27 +68,10 @@
                     var game = new Rotten.Game();
 
                     // Create main scene
-                    var main_scene = new Rotten.Scene(game);
-
-                    // Create main map
-                    var map = new Rotten.Drawables.TiledMap("my_wonderful_world", 64, 64);
-                    map.addTileset("green_hill", "my_wonderful_tileset");
-
-                    // Create a spritesheet
-                    var henry = new Rotten.Drawables.SpriteSheet("henry", 32, 32);
-
-                    // Add things to scene by order of appearance
-                    main_scene.addExisting(map);
-                    main_scene.addExisting(henry);
-
-                    // Register some key events
-                    game.inputs.onKeyDown(["z", "w"], function(human_name){ console.log(human_name); henry.y-= 10; });
-                    game.inputs.onKeyDown(["q", "a"], function(human_name){ henry.x-= 10; });
-                    game.inputs.onKeyDown(["s"], function(human_name){ henry.y+= 10; });
-                    game.inputs.onKeyDown(["d"], function(human_name){ henry.x+= 10; });
+                    var scene = new Stage(game);
 
                     // Add scene to game
-                    game.addScene("main_scene", main_scene);
+                    game.addScene("main_scene", scene);
 
                     // Start game !
                     game.start("main_scene");
