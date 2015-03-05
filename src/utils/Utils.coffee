@@ -72,3 +72,20 @@ class Rotten.Utils
     # @return {String} Browser app name
     @getBrowserName: ->
         navigator.appName
+
+
+    # Extends any class properties or methods simply
+    #
+    # @param {Object} child The one that receives everything
+    # @param {Object} child The one that gives everything
+    # @return {Object} The child, extended
+    @extends: (child, parent) ->
+        for key in parent
+            if parent.hasOwnProperty key
+                child[key] = parent[key]
+        ctor = ->
+            @constructor = child
+
+        ctor.prototype = parent.prototype
+        child.prototype = new ctor()
+        child.__super__ = parent.prototype
