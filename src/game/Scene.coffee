@@ -13,7 +13,8 @@ class Rotten.Scene
     # Constructs your scene
     #
     # @param {Rotten.Game} game Your current game
-    constructor: (@game) ->
+    # @param {Object} custom Object having setup, update & draw methods
+    constructor: (@game, @custom) ->
 
         # Objects in your scene
         @objects = []
@@ -21,16 +22,19 @@ class Rotten.Scene
 
     # All your setup logic should go here (adding objects to scene, ...)
     setup: ->
+        @custom.setup @ if @custom and @custom.setup
         object.setup() for object in @objects
 
 
     # All your update logic should go here (moving objects, ...)
     update: ->
+        @custom.update @ if @custom and @custom.update
         object.update() for object in @objects
 
 
     # All your draw logic should be here (draw objects, draw shit, ...)
     draw: ->
+        @custom.draw @ if @custom and @custom.draw
         object.draw() for object in @objects
 
 
