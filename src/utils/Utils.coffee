@@ -72,14 +72,3 @@ class Rotten.Utils
     # @return {String} Browser app name
     @getBrowserName: ->
         navigator.appName
-
-
-    # Extends any class properties or methods simply
-    #
-    # @param {Object} child The one that receives everything
-    # @param {Object} child The one that gives everything
-    # @return {Object} The child, extended
-    @extends: (child, parent) ->
-        parent.call child
-        child.__proto__ = parent.prototype
-        child.__super__ = parent.prototype
