@@ -80,12 +80,6 @@ class Rotten.Utils
     # @param {Object} child The one that gives everything
     # @return {Object} The child, extended
     @extends: (child, parent) ->
-        for key in parent
-            if parent.hasOwnProperty key
-                child[key] = parent[key]
-        ctor = ->
-            @constructor = child
-
-        ctor.prototype = parent.prototype
-        child.prototype = new ctor()
+        parent.call child
+        child.__proto__ = parent.prototype
         child.__super__ = parent.prototype
