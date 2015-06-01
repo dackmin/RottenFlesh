@@ -1,20 +1,26 @@
-# An easy to use SpriteSheet class with friendly animation system
+###*
+ # An easy to use SpriteSheet class with friendly animation system
+ # @class Rotten.Drawables.SpriteSheet
+ # @extends Rotten.Drawable
+###
 class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
 
 
-    # Constructs a new spritesheet
-    #
-    # @param {String} asset_name Name of your asset in texture cache
-    # @param {int} frame_width Width of one frame on your spritesheet
-    # @param {int} frame_height Height of one frame on your spritesheet
-    # @param {Object} options Spritesheet options
-    # @option options {int} x X position of your spritesheet
-    # @option options {int} y Y position of your spritesheet
-    # @option options {float} scale Scale of your spritesheet
-    # @option options {float} rotate Angle of rotation (in degrees)
-    # @option options {Array} anchor X & Y positions of your spritesheet anchor
-    # @option options {float} alpha Opacity of your spritesheet
-    # @option options {boolean} hidden Whether to show your spritesheet or not
+    ###*
+     # Constructs a new spritesheet
+     # @constructor
+     # @param {String} asset_name - Name of your asset in texture cache
+     # @param {int} frame_width - Width of one frame on your spritesheet
+     # @param {int} frame_height - Height of one frame on your spritesheet
+     # @param {Object} options - Spritesheet options
+     # @option options {int} x - X position of your spritesheet
+     # @option options {int} y - Y position of your spritesheet
+     # @option options {float} scale - Scale of your spritesheet
+     # @option options {float} rotate - Angle of rotation (in degrees)
+     # @option options {Array} anchor - X & Y positions of your spritesheet anchor
+     # @option options {float} alpha - Opacity of your spritesheet
+     # @option options {boolean} hidden - Whether to show your spritesheet or not
+    ###
     constructor: (asset_name, frame_width, frame_height, options) ->
         super
         if options is undefined then options = {}
@@ -71,8 +77,11 @@ class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
         @current_frame = 0
 
 
-    # Setup your spritesheet
-    setup: ->
+    ###*
+     # Setup your spritesheet
+     # @method setup
+    ###
+    setup: () ->
 
         # Setup frames
         z = 0
@@ -84,13 +93,19 @@ class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
                 z++
 
 
-    # Update logic of your sprite
-    update: ->
+    ###*
+     # Update logic of your sprite
+     # @method update
+    ###
+    update: () ->
         # TODO : Add hover mouse event
 
 
-    # Draw your sprite
-    draw: ->
+    ###*
+     # Draw your sprite
+     # @method draw
+    ###
+    draw: () ->
         if @hidden is true then return
 
         # Save context
@@ -130,10 +145,12 @@ class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
         @game.render.restore()
 
 
-    # Active region of your sprite
-    #
-    # @return {Object} Rectangle region representing your sprite
-    rect: ->
+    ###*
+     # Active region of your sprite
+     # @method rect
+     # @return {Object} - Rectangle region representing your sprite
+    ###
+    rect: () ->
         x: @x
         y: @y
         width: @width * @scale

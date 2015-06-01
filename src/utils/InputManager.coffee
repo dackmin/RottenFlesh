@@ -1,10 +1,15 @@
-# A powerful input manager for all Rotten input events (even gamepads !)
+###*
+ # A powerful input manager for all Rotten input events (even gamepads !)
+ # @class Rotten.InputManager
+###
 class Rotten.InputManager
 
 
-    # Constructs a new input manager
-    #
-    # @param {Rotten.Game} game Current game
+    ###*
+     # Constructs a new input manager
+     # @constructor
+     # @param {Rotten.Game} game - Current game
+    ###
     constructor: (@game) ->
 
         # X mouse position on screen
@@ -174,8 +179,11 @@ class Rotten.InputManager
         @prevented_keys = {}
 
 
-    # Setup input manager
-    setup: ->
+    ###*
+     # Setup input manager
+     # @method setup
+    ###
+    setup: () ->
 
         # Register keyboard & mice events
         window.addEventListener "keydown", @.handleKeyDown
@@ -191,14 +199,19 @@ class Rotten.InputManager
         document.oncontextmenu = -> return false
 
 
-    # Reset all pressed keys
-    resetPressedKeys: ->
+    ###*
+     # Reset all pressed keys
+     # @method resetPressedKeys
+    ###
+    resetPressedKeys: () ->
         @pressed_keys = {}
 
 
-    # Key up event handler
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Key up event handler
+     # @method handleKeyUp
+     # @param {Object} e - Window event object
+    ###
     handleKeyUp: (e) =>
         e = e or window.event
 
@@ -221,9 +234,11 @@ class Rotten.InputManager
                 e.preventDefault()
 
 
-    # Key down event handler
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Key down event handler
+     # @method handleKeyDown
+     # @param {Object} e - Window event object
+    ###
     handleKeyDown: (e) =>
         e = e or window.event
 
@@ -246,9 +261,11 @@ class Rotten.InputManager
                 e.preventDefault()
 
 
-    # Mouse up event handler
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Mouse up event handler
+     # @method handleMouseUp
+     # @param {Object} e - Window event object
+    ###
     handleMouseUp: (e) =>
         e = e or window.event
 
@@ -268,9 +285,11 @@ class Rotten.InputManager
             e.preventDefault()
 
 
-    # Mouse down event handler
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Mouse down event handler
+     # @method handleMouseDown
+     # @param {Object} e - Window event object
+    ###
     handleMouseDown: (e) =>
         e = e or window.event
 
@@ -290,9 +309,11 @@ class Rotten.InputManager
             e.preventDefault()
 
 
-    # Mouse move event handler
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Mouse move event handler
+     # @method handleMouseMove
+     # @param {Object} e - Window event object
+    ###
     handleMouseMove: (e) =>
         e = e or window.event
 
@@ -308,9 +329,11 @@ class Rotten.InputManager
         @mouse_callbacks.mouse_move { x: @mouse_x, y: @mouse_y } if @mouse_callbacks.mouse_move is not null
 
 
-    # Touche start handle
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Touch start handle
+     # @method handleTouchStart
+     # @param {Object} e - Window event object
+    ###
     handleTouchStart: (e) =>
         e = e or window.event
 
@@ -322,9 +345,11 @@ class Rotten.InputManager
         @mouse_y = e.touches[0].pageY - @game.render.view.offsetTop
 
 
-    # Touche end handle
-    #
-    # @param {Object} e Window event object
+    ###*
+     # Touch end handle
+     # @method handleTouchEnd
+     # @param {Object} e - Window event object
+    ###
     handleTouchEnd: (e) =>
         e = e or window.event
 
@@ -336,18 +361,22 @@ class Rotten.InputManager
         @mouse_y = undefined
 
 
-    # Manually prevent default behavior for some keys
-    #
-    # @param {Array} keys Array of human key names (ie. "left_mouse_button")
+    ###*
+     # Manually prevent default behavior for some keys
+     # @method preventDefaultKeys
+     # @param {Array} keys - Array of human key names (ie. "left_mouse_button")
+    ###
     preventDefaultKeys: (keys) ->
         @prevented_keys[key] = true for key in keys
 
 
-    # Check if a key or button is pressed
-    #
-    # @param {Array} keys Array of human key names (ie. "left_mouse_button")
-    # @param {boolean} every Whether you want all the keys to be checked or only some of them
-    # @return {boolean} true if your key(s) is(are) pressed, false otherwise
+    ###*
+     # Check if a key or button is pressed
+     # @method pressed
+     # @param {Array} keys - Array of human key names (ie. "left_mouse_button")
+     # @param {boolean} every - Whether you want all the keys to be checked or only some of them
+     # @return {boolean} - true if your key(s) is(are) pressed, false otherwise
+    ###
     pressed: (keys, every) ->
         if every is true
             keys.every ( (key) => @pressed_keys[key] )
@@ -355,12 +384,14 @@ class Rotten.InputManager
             keys.some ( (key) => @pressed_keys[key] )
 
 
-    # Same as pressed() but for a non repeated call to a key
-    # TODO : Better handle of every & some
-    #
-    # @param {Array} keys Array of human key names (ie. "left_mouse_button")
-    # @param {boolean} every Whether you want all the keys to be checked or only some of them
-    # @return {boolean} true if your key(s) is(are) pressed, false otherwise
+    ###*
+     # Same as pressed() but for a non repeated call to a key
+     # TODO : Better handle of every & some
+     # @method pressedWithoutRepeat
+     # @param {Array} keys - Array of human key names (ie. "left_mouse_button")
+     # @param {boolean} every - Whether you want all the keys to be checked or only some of them
+     # @return {boolean} - true if your key(s) is(are) pressed, false otherwise
+    ###
     pressedWithoutRepeat: (keys, every) ->
         if @pressed keys,every is true
             @previous_pressed_keys[key] = true for key in keys
@@ -370,55 +401,69 @@ class Rotten.InputManager
             false
 
 
-    # Register on key up event callback
-    #
-    # @param {Array} keys Array of human key names (ie. "left_mouse_button")
-    # @param {Function} cb Callback handler
+    ###*
+     # Register on key up event callback
+     # @method onKeyUp
+     # @param {Array} keys Array of human key names (ie. "left_mouse_button")
+     # @param {Function} cb Callback handler
+    ###
     onKeyUp: (keys, cb) ->
         @keyboard_callbacks.key_up[key] = cb for key in keys
 
 
-    # Register on key down event callback
-    #
-    # @param {Array} keys Array of human key names (ie. "left_mouse_button")
-    # @param {Function} cb Callback handler
+    ###*
+     # Register on key down event callback
+     # @method onKeyDown
+     # @param {Array} keys Array of human key names (ie. "left_mouse_button")
+     # @param {Function} cb Callback handler
+    ###
     onKeyDown: (keys, cb) ->
         @keyboard_callbacks.key_down[key] = cb for key in keys
 
 
-    # Register mouse up event callback
-    #
-    # @param {Array} buttons Array of human button names (ie. "left_mouse_button")
-    # @param {Function} cb Callback handler
+    ###*
+     # Register mouse up event callback
+     # @method onMouseUp
+     # @param {Array} buttons Array of human button names (ie. "left_mouse_button")
+     # @param {Function} cb Callback handler
+    ###
     onMouseUp: (buttons, cb) ->
         @mouse_callbacks.mouse_up[button] = cb for button in buttons
 
 
-    # Register mouse down event callback
-    #
-    # @param {Array} buttons Array of human button names (ie. "left_mouse_button")
-    # @param {Function} cb Callback handler
+    ###*
+     # Register mouse down event callback
+     # @method onMouseDown
+     # @param {Array} buttons Array of human button names (ie. "left_mouse_button")
+     # @param {Function} cb Callback handler
+    ###
     onMouseDown: (buttons, cb) ->
         @mouse_callbacks.mouse_down[button] = cb for button in buttons
 
 
-    # Register mouse move event callback
-    #
-    # @param {Function} cb Callback handler
+    ###*
+     # Register mouse move event callback
+     # @method onMouseMove
+     # @param {Function} cb Callback handler
+    ###
     onMouseMove: (cb) ->
         @mouse_callbacks.mouse_move = cb
 
 
-    # Register touch start event callback
-    #
-    # @param {Function} cb Callback handler
+    ###*
+     # Register touch start event callback
+     # @method onTouchStart
+     # @param {Function} cb Callback handler
+    ###
     onTouchStart: (cb) ->
         @mouse_callbacks.touch_start = cb
 
 
-    # Register touch end event callback
-    #
-    # @param {Function} cb Callback handler
+    ###*
+     # Register touch end event callback
+     # @method onTouchEnd
+     # @param {Function} cb Callback handler
+    ###
     onTouchEnd: (cb) ->
         @mouse_callbacks.touch_end = cb
 

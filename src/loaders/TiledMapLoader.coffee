@@ -1,12 +1,18 @@
-# Tiled map loader
-# Using JSON format is a pure generic choice : wanting to avoid FreshFlesh
-# mistakes with TMX format parsing
+###*
+ # Tiled map loader
+ # Using JSON format is a pure generic choice : wanting to avoid FreshFlesh
+ # mistakes with TMX format parsing
+ # @class Rotten.Loaders.TiledMapLoader
+ # @extends Rotten.EventManager
+###
 class Rotten.Loaders.TiledMapLoader extends Rotten.EventManager
 
 
-    # Constructs a tiled map loader
-    #
-    # @param {String} url Map url
+    ###*
+     # Constructs a tiled map loader
+     # @constructor
+     # @param {Object} asset - Asset infos (name: String, url: String)
+    ###
     constructor: (asset) ->
         super
 
@@ -17,8 +23,11 @@ class Rotten.Loaders.TiledMapLoader extends Rotten.EventManager
         @mapUrl = asset.url
 
 
-    # Loads the tiled map
-    load: ->
+    ###*
+     # Loads the tiled map
+     # @method load
+    ###
+    load: () ->
         Rotten.Utils.ajax
             url: @mapUrl
             complete: (data) =>

@@ -1,20 +1,26 @@
-# A totally classic Sprite logic made especially for games (lol)
+###*
+ # A totally classic Sprite logic made especially for games (lol)
+ # @class Rotten.Drawables.Sprite
+ # @extends Rotten.Drawable
+###
 class Rotten.Drawables.Sprite extends Rotten.Drawable
 
 
-    # Constructs a new sprite
-    #
-    # @param {String} asset_name Name of your asset in texture cache
-    # @param {Object} options Sprite options
-    # @option options {int} x X position of your sprite
-    # @option options {int} y Y position of your sprite
-    # @option options {float} scale Scale of your sprite
-    # @option options {float} rotate Angle of rotation (in degrees)
-    # @option options {Object} roundClip Clipping circle
-    # @option options {Object} rectClip Clipping rectangle
-    # @option options {Array} anchor X & Y positions of your sprite anchor
-    # @option options {float} alpha Opacity of your sprite
-    # @option options {boolean} hidden Whether to show your sprite or not
+    ###*
+     # Constructs a new sprite
+     # @constructor
+     # @param {String} asset_name - Name of your asset in texture cache
+     # @param {Object} options - Sprite options
+     # @option options {int} x - X position of your sprite
+     # @option options {int} y - Y position of your sprite
+     # @option options {float} scale - Scale of your sprite
+     # @option options {float} rotate - Angle of rotation (in degrees)
+     # @option options {Object} roundClip - Clipping circle
+     # @option options {Object} rectClip - Clipping rectangle
+     # @option options {Array} anchor - X & Y positions of your sprite anchor
+     # @option options {float} alpha - Opacity of your sprite
+     # @option options {boolean} hidden - Whether to show your sprite or not
+    ###
     constructor: (asset_name, options) ->
         super
         if options is undefined then options = {}
@@ -59,19 +65,28 @@ class Rotten.Drawables.Sprite extends Rotten.Drawable
         @hover = false
 
 
-    # Setup your sprite
-    setup: ->
+    ###*
+     # Setup your sprite
+     # @method setup
+    ###
+    setup: () ->
         # Setup is useful when you don't use class stuff with constructors
         # Only here, in sprite class, to avoid warning on missing setup override
 
 
-    # Update logic of your sprite
-    update: ->
+    ###*
+     # Update logic of your sprite
+     # @method update
+    ###
+    update: () ->
         # TODO : Add hover mouse event
 
 
-    # Draw your sprite
-    draw: ->
+    ###*
+     # Draw your sprite
+     # @method draw
+    ###
+    draw: () ->
         if @hidden is true then return
 
         # Save context
@@ -103,10 +118,12 @@ class Rotten.Drawables.Sprite extends Rotten.Drawable
         @game.render.restore()
 
 
-    # Active region of your sprite
-    #
-    # @return {Object} Rectangle region representing your sprite
-    rect: ->
+    ###*
+     # Active region of your sprite
+     # @method rect
+     # @return {Object} - Rectangle region representing your sprite
+    ###
+    rect: () ->
         x: @x
         y: @y
         width: @width * @scale

@@ -1,9 +1,25 @@
+###*
+ # Easy-to-use animation helper for all objects extending Drawable class
+ # @class Rotten.Animation
+ # @extends Rotten.EventManager
+###
 class Rotten.Animation extends Rotten.EventManager
 
+
+    ###*
+     # Animation constructor
+     # @constructor
+     # @param {Object} item - Drawable to animate
+     # @param {Object} options - Constructor options
+     # @param options {int} duration - Animation easing duration
+     # @param options {String} ease - Easing function
+    ###
     constructor: (item, options) ->
 
+        # Item to animate
         @item = item
 
+        # Original item properties to be modified by animation
         @original =
             x: @item.x
             y: @item.y
@@ -12,23 +28,34 @@ class Rotten.Animation extends Rotten.EventManager
             scale: @item.scale
             alpha: @item.alpha
 
+        # Animation duration
         @duration = options.duration or 400
 
+        # Stop animation by default (overrided by options.autostart)
         @stoped = false
 
+        # Default easing option
         @ease = options.ease or "easeOutQuad"
 
+        # Animation ticking timer
         @timer = new Rotten.Timer
             timeout: @duration
             interval: options.step or 10
             autostart: options.autostart or true
 
+        # Save options in case of... an emergency. Don't ask stupid questions
+        # for fuck sake.
         @options = options
 
+        # Listen to all animation event
         @.registerEvents()
 
 
-    registerEvents: ->
+    ###*
+     # Register all animation event, before it was cool
+     # @method registerEvents
+    ###
+    registerEvents: () ->
 
         @timer.listen "start", (e) =>
             @.reset()
@@ -45,11 +72,20 @@ class Rotten.Animation extends Rotten.EventManager
             @.fire "stop", e
 
 
-    update: ->
+    ###*
+     # Update method called after every game loop to update animations timers
+     # @method update
+    ###
+    update: () ->
         if @stoped is false
             @timer.update()
 
 
+    ###*
+     # Actual method called to run an animation
+     # @method animate
+     # @param {Object} e - Timer event object
+    ###
     animate: (e) ->
         @item.x = @.ease e.current, @original.x, (@options.x - @original.x), @duration, @ease if @options.x or @options.x is 0
         @item.y = @.ease e.current, @original.y, (@options.y - @original.y), @duration, @ease if @options.y or @options.y is 0
@@ -59,6 +95,15 @@ class Rotten.Animation extends Rotten.EventManager
         @item.alpha = @.ease e.current, @original.alpha, (@options.alpha - @original.alpha), @duration, @ease if @options.alpha or @options.alpha is 0
 
 
+    ###*
+     # Animation easing (see: http://gizma.com/easing)
+     # @method ease
+     # @param {int} t - Current time
+     # @param {int} b - Start value
+     # @param {int} c - Change in value
+     # @param {int} d - Duration
+     # @param {String} ease - Wanted easing method
+    ###
     ease: (t, b, c, d, ease) ->
         s = 1.70158
 

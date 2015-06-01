@@ -1,10 +1,16 @@
-# Simple image loader
+###
+ # Simple image loader
+ # @class Rotten.Loaders.ImageLoader
+ # @extends Rotten.EventManager
+###
 class Rotten.Loaders.ImageLoader extends Rotten.EventManager
 
 
-    # Loader constructor
-    #
-    # @param {String} url Image url
+    ###*
+     # Loader constructor
+     # @constructor
+     # @param {Object} asset - Asset infos (name: String, url: String)
+    ###
     constructor: (asset) ->
         super
 
@@ -15,9 +21,11 @@ class Rotten.Loaders.ImageLoader extends Rotten.EventManager
         @imageUrl = asset.url
 
 
-    # Actually loads your image
-    load: ->
-
+    ###*
+     # Actually loads your image
+     # @method load
+    ###
+    load: () ->
         img = new Image()
         img.src = @imageUrl
         img.onload = () => @fire "loaded", {}

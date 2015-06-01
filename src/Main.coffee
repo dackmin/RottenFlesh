@@ -1,4 +1,6 @@
-# Rotten global namespaces
+###*
+ # Rotten global namespaces
+###
 Rotten =
     TextureCache: {}
     MapCache: {}

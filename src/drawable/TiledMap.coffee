@@ -1,18 +1,24 @@
-# A drawable Tiled map
-# ie. Make the most beautiful map you can on Tiled, export it as JSON,
-# and add it here : the end.
-#
-# @example How to create a TiledMap
-#   var map = new Rotten.Drawables.TiledMap("my_beautiful_map", 32, 32)
-#
+###*
+ # A drawable Tiled map
+ # ie. Make the most beautiful map you can on Tiled, export it as JSON,
+ # and add it here : the end.
+ # @class Rotten.Drawables.TiledMap
+ # @extends Rotten.Drawable
+ #
+ # @example How to create a TiledMap
+ #   var map = new Rotten.Drawables.TiledMap("my_beautiful_map", 32, 32)
+ #
+###
 class Rotten.Drawables.TiledMap extends Rotten.Drawable
 
 
-    # Constructs a new TiledMap
-    #
-    # @param {String} name Your map name
-    # @param {int} tile_width Width of a tile in your map
-    # @param {int} tile_height Height of a tile in your map
+    ###*
+     # Constructs a new TiledMap
+     # @constructor
+     # @param {String} name Your map name
+     # @param {int} tile_width Width of a tile in your map
+     # @param {int} tile_height Height of a tile in your map
+    ###
     constructor: (@name, @tile_width, @tile_height) ->
         super
 
@@ -29,10 +35,11 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
         @y = 0
 
 
-    # Setup your TiledMap
-    #
-    # @override
-    setup: ->
+    ###*
+     # Setup your TiledMap
+     # @method setup
+    ###
+    setup: () ->
 
         # Register tile positions on tileset to avoid intensive usage of CPU
         for tileset in @map.tilesets
@@ -46,17 +53,19 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
                     z++
 
 
-    # Update your TiledMap
-    #
-    # @override
-    update: ->
+    ###*
+     # Update your TiledMap
+     # @method update
+    ###
+    update: () ->
         # Nothing to do here, we only draw shit on maps
 
 
-    # Draw your TiledMap
-    #
-    # @override
-    draw: ->
+    ###*
+     # Draw your TiledMap
+     # @method draw
+    ###
+    draw: () ->
 
         # Save context
         @game.render.save()
@@ -73,12 +82,14 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
         @game.render.restore()
 
 
-    # Draws a tile
-    #
-    # @param {int} x Position of tile on map (in tiles, not px)
-    # @param {int} y Position of tile on map (in tiles, not px)
-    # @param {int} GID Tileset clipping position ID
-    # @param {String} type Determine if your image is an object or a tile
+    ###*
+     # Draws a tile
+     # @method drawImageFromGID
+     # @param {int} x - Position of tile on map (in tiles, not px)
+     # @param {int} y - Position of tile on map (in tiles, not px)
+     # @param {int} GID - Tileset clipping position ID
+     # @param {String} type - Determine if your image is an object or a tile
+    ###
     drawImageFromGID: (x, y, GID, type) ->
         if isNaN GID then return
 
@@ -101,9 +112,11 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
             tileset.tileheight
 
 
-    # Get a tileset from a given GID
-    #
-    # @param {int} GID Tileset clipping position ID
+    ###*
+     # Get a tileset from a given GID
+     # @method getTilesetFromGID
+     # @param {int} GID - Tileset clipping position ID
+    ###
     getTilesetFromGID: (GID) ->
         tileset = {}
 
@@ -115,9 +128,11 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
                 return tileset
 
 
-    # Add a tileset image
-    #
-    # @param {String} tilesetName Name of your tileset INSIDE your map
-    # @param {String} assetName Name of your preloaded asset INSIDE Rotten
+    ###*
+     # Add a tileset image
+     # @method addTileset
+     # @param {String} tilesetName Name of your tileset INSIDE your map
+     # @param {String} assetName Name of your preloaded asset INSIDE Rotten
+    ###
     addTileset: (tilesetName, assetName) ->
         @tilesets_images[tilesetName] = assetName
