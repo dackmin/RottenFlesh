@@ -165,5 +165,7 @@ class Rotten.Renders.CanvasRender extends Rotten.Engine
      # @param {int} width - Width of your rectangle
      # @param {int} height - Height of your rectangle
     ###
-    rect: (x, y, width, height) ->
-        @.getContext().rect x, y, width, height
+    rect: (x, y, width, height, color) ->
+        if color
+            @.getContext().fillStyle = color
+        @.getContext().fillRect x, y, width, height
