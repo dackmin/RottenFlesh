@@ -136,3 +136,15 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
     ###
     addTileset: (tilesetName, assetName) ->
         @tilesets_images[tilesetName] = assetName
+
+
+    ###*
+     # Map rect
+     # @method rect
+     # @return {Object}
+    ###
+    rect: ->
+        x: @x
+        y: @y
+        width: @map.width * @tile_width
+        height: @map.height * @tile_height
