@@ -24,12 +24,19 @@ class Rotten.Scene
         # Objects in your scene
         @objects = []
 
+        # Scene current viewport
+        @viewport = new Rotten.Viewport @game
+
+        # Scene central object
+        # If set, viewport will move around this object
+        @center = null
+
 
     ###*
      # All your setup logic should go here (adding objects to scene, ...)
      # @method setup
     ###
-    setup: () ->
+    setup: ->
         @custom.setup @ if @custom and @custom.setup
         object.setup() for object in @objects
 
@@ -38,8 +45,9 @@ class Rotten.Scene
      # All your update logic should go here (moving objects, ...)
      # @method update
     ###
-    update: () ->
+    update: ->
         @custom.update @ if @custom and @custom.update
+        @viewport.centerAround @center if @center
         object.update() for object in @objects
 
 
@@ -47,9 +55,9 @@ class Rotten.Scene
      # All your draw logic should be here (draw objects, draw shit, ...)
      # @method draw
     ###
-    draw: () ->
+    draw: ->
         @custom.draw @ if @custom and @custom.draw
-        object.draw() for object in @objects
+        @viewport.draw object for object in @objects
 
 
     ###*
@@ -65,3 +73,10 @@ class Rotten.Scene
             @objects.push object if @objects.indexOf object == -1
         else
             @objects.push object
+
+    ###*
+     # Set scene center object
+     # @method centerAround
+    ###
+    centerAround: (object) ->
+        @center = object
