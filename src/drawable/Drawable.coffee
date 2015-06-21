@@ -35,3 +35,11 @@ class Rotten.Drawable
     ###
     draw: () ->
         throw new Error "[Rotten.Drawable] Your drawable should override draw() method."
+
+
+    ###*
+     # Returns an actual rect of your drawable
+     # @method rect
+    ###
+    rect: ->
+        throw new Error "[Rotten.Drawable] Your drawable should override rect() method."
