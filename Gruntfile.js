@@ -100,12 +100,21 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        // Test settings
+        karma: {
+            unit: {
+                configFile: 'tests/karma.conf.coffee',
+                singleRun: true
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask("build", [
         "coffee:build"
@@ -130,7 +139,8 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask("test", [
-
+        "build",
+        "karma"
     ]);
 
 };
