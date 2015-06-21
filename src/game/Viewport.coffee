@@ -118,6 +118,12 @@ class Rotten.Viewport
         @game.render.restore()
 
 
+    ###*
+     # Check if object is (partly) inside viewport, to avoid overload of gpu
+     # trying to draw everything on the scene at the same time
+     # @method isPartlyInside
+     # @param {Rotten.Drawable} object - Object to check
+    ###
     isPartlyInside: (object) ->
         rect = object.rect()
         rect.right = rect.x + rect.width
