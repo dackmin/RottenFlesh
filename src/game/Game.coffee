@@ -49,7 +49,7 @@ class Rotten.Game
 
         # Main game loop : Due to coffee script scope problems, I had to put
         # that here
-        @requestAnimation = () =>
+        @requestAnimation = =>
             @currentScene.update()
             @currentScene.draw()
 
@@ -88,8 +88,9 @@ class Rotten.Game
     ###
     start: (sceneName) ->
         if sceneName is not undefined then @currentScene = @scenes[name]
-        if @currentScene is undefined or null then return
+        if @currentScene is undefined or null then return false
 
         @inputs.setup()
         @currentScene.setup()
         @requestAnimation()
+        return true
