@@ -76,6 +76,15 @@ class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
         # Your spritesheet current frame
         @current_frame = 0
 
+        # Set physics shape
+        @shape = new p2.Rectangle @rect().width, @rect().height
+
+        # Set physics body
+        @body = new p2.Body
+            mass: 1
+            position: [@rect().x + @rect().width / 2, @rect().y + @rect().height / 2]
+        @body.addShape @shape
+
 
     ###*
      # Setup your spritesheet
@@ -97,7 +106,13 @@ class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
      # Update logic of your sprite
      # @method update
     ###
-    update: () ->
+    update: ->
+
+        # Update physics
+        @x = @body.position[0] - @body.shapes[0].width / 2
+        @y = @body.position[1] - @body.shapes[0].height / 2
+        @body.velocity[0] = @body.velocity[1] = 0
+
         # TODO : Add hover mouse event
 
 
@@ -129,6 +144,10 @@ class Rotten.Drawables.SpriteSheet extends Rotten.Drawable
         @game.render.translate @x + @anchor[0], @y + @anchor[1]
         @game.render.rotate @rotate * (Math.PI / 180)
         @game.render.translate -(@x + @anchor[0]), -(@y + @anchor[1])
+
+        # Draw body for debug purposes
+        if Rotten.Settings.DEBUG is true
+            @game.render.rect @rect().x, @rect().y, @rect().width, @rect().height, "rgba(255,0,0,0.4)"
 
         # Draw sprite
         @game.render.drawSubImage @image,

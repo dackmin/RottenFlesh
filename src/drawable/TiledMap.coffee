@@ -34,6 +34,12 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
         # Map position on Y
         @y = 0
 
+        # Setup physics for map
+        @world = new p2.World
+            gravity: [0 ,0]
+
+        # Map obstacles
+        @obstacles = []
 
     ###*
      # Setup your TiledMap
@@ -52,13 +58,29 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
                         y : y
                     z++
 
+        # Set obstacles from tiledmap content
+        for layer in @map.layers
+            if layer.type is "objectgroup"
+                for object in layer.objects
+                    if object.type is "obstacle"
+                        _shape = new p2.Rectangle object.width, object.height
+                        _body = new p2.Body
+                            mass: 0
+                            position: [object.x + object.width / 2, object.y + object.height / 2]
+
+                        _body.addShape _shape
+                        @world.addBody _body
+                        @obstacles.push object
+
 
     ###*
      # Update your TiledMap
      # @method update
     ###
     update: () ->
-        # Nothing to do here, we only draw shit on maps
+
+        # Update world physics
+        @world.step 1/60
 
 
     ###*
@@ -72,11 +94,18 @@ class Rotten.Drawables.TiledMap extends Rotten.Drawable
 
         # Draw each layer
         for layer in @map.layers
-            for x in [0...layer.width]
-                for y in [0...layer.height]
+            if layer.type is "tilelayer"
+                for x in [0...layer.width]
+                    for y in [0...layer.height]
 
-                    # And in each layer, draw every tile
-                    @.drawImageFromGID x, y, layer.data[x+(y*layer.width)], "tile" # if layer.data[x][y] not 0
+                        # And in each layer, draw every tile
+                        @.drawImageFromGID x, y, layer.data[x+(y*layer.width)], "tile" # if layer.data[x][y] not 0
+
+
+        # Draw obstacles for debug purposes
+        if Rotten.Settings.DEBUG is true
+            for obstacle in @obstacles
+                @game.render.rect obstacle.x, obstacle.y, obstacle.width, obstacle.height, "rgba(0, 0, 255, 0.4)"
 
         # Restore context
         @game.render.restore()
