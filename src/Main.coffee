@@ -7,3 +7,5 @@ Rotten =
     Loaders: {}
     Drawables: {}
     Renders: {}
+    Settings:
+        DEBUG: true
