@@ -30,6 +30,9 @@
                     // Create a spritesheet
                     henry = new Rotten.Drawables.SpriteSheet("henry", 32, 32);
 
+                    // Set collisions between henry and our map objects
+                    map.world.addBody(henry.body)
+
                     // Add things to scene by order of appearance
                     scene.addExisting(map);
                     scene.addExisting(henry);
@@ -44,10 +47,10 @@
                 };
 
                 this.update = function(scene){
-                    if(scene.game.inputs.pressed(["z", "w"])) henry.y-= 10;
-                    if(scene.game.inputs.pressed(["q", "a"])) henry.x-= 10;
-                    if(scene.game.inputs.pressed(["s"])) henry.y+= 10;
-                    if(scene.game.inputs.pressed(["d"])) henry.x+= 10;
+                    if(scene.game.inputs.pressed(["z", "w"])) henry.body.velocity[1]-= 500;
+                    if(scene.game.inputs.pressed(["q", "a"])) henry.body.velocity[0]-= 500;
+                    if(scene.game.inputs.pressed(["s"])) henry.body.velocity[1]+= 500;
+                    if(scene.game.inputs.pressed(["d"])) henry.body.velocity[0]+= 500;
                 };
 
                 this.draw = function(){};
