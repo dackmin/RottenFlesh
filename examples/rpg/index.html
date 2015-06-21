@@ -34,6 +34,13 @@
                     scene.addExisting(map);
                     scene.addExisting(henry);
 
+                    // Edit viewport max values to map size otherwise viewport
+                    // size = window size
+                    scene.viewport.max_x = map.rect().width;
+                    scene.viewport.max_y = map.rect().height;
+
+                    // Center scene viewport on our character
+                    scene.centerAround(henry);
                 };
 
                 this.update = function(scene){
