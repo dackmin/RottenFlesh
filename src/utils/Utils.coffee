@@ -12,7 +12,7 @@ class Rotten.Utils
      # @method getXMLHttpRequest
      # @return {Object} - working XMLHttpRequest object
     ###
-    @getXMLHttpRequest: () ->
+    @getXMLHttpRequest: ->
         if window.XMLHttpRequest then new XMLHttpRequest() else new ActiveXObject "Microsoft.XMLHTTP"
 
 
@@ -34,7 +34,7 @@ class Rotten.Utils
         complete = options.complete or (->)
         xhr = Rotten.Utils.getXMLHttpRequest()
 
-        xhr.onreadystatechange = () ->
+        xhr.onreadystatechange = ->
             if xhr.readyState is 4
                 complete if json then JSON.parse xhr.responseText else xhr.responseText
 
@@ -47,7 +47,7 @@ class Rotten.Utils
      # @method screenSize
      # @return {Object} - Width and height of screen
     ###
-    @screenSize: () ->
+    @screenSize: ->
         if not window.innerWidth
             if document.documentElement.clientWidth is not 0
                 width: document.documentElement.clientWidth
