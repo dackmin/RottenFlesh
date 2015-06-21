@@ -39,6 +39,7 @@ module.exports = function(grunt) {
 
                         // Game
                         'src/game/Game.coffee',
+                        'src/game/Viewport.coffee',
                         'src/game/Scene.coffee',
                     ]
                 }
